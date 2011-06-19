@@ -49,6 +49,7 @@ struct _cap {
 	char		pwd[MAX_PWD_LEN];
 	struct	in_addr  server_ip;
 	uint16_t	port;
+	uint16_t	dsslport;
 	int			ch[6];
 };
 

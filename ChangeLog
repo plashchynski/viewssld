@@ -2,3 +2,10 @@
 
 	* viewssld: initial version.
 
+2011-06-19  Alec Waters <Alec.Waters@dataline.co.uk>
+
+  * Outputting a fake 3-way TCP handshake for the decrypted traffic
+  * Outputting the decrypted server replies as well as the client requests, keeping the (fake) TCP sequence numbers properly up to date
+  * Outputting a fake RST at the end of each session
+  * Using an easily-searchable IP Ident number for all the fake frames so you can tell which ones were output by viewssld (54609 == 0xd551 == DSSL J )
+  * Outputting the decrypted frames on a different port to which they were captured on (e.g. 443->80, 465->25, 993->143, etc.)

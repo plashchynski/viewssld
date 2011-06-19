@@ -24,7 +24,7 @@
 
 #include "viewssld.h"
 
-const char *SessionToString(const TcpSession *sess);
+//const char *SessionToString(const TcpSession *sess);
 void DumpData(const u_char *data, uint32_t pkt_size);
 int getmac(const char *name, u_int8_t *mac);
 int load_config(const char *path, struct _config *config);

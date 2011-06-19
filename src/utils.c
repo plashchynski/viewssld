@@ -41,7 +41,7 @@ extern struct _config config;
 
 static void rmspace(char *str);
 static char *tolow(char *str);
-static void AddressToString(uint32_t ip, uint16_t port, char *buff);
+//static void AddressToString(uint32_t ip, uint16_t port, char *buff);
 
 void errorlog(char *message)
 {
@@ -56,12 +56,12 @@ void errorlog(char *message)
 	exit(EXIT_FAILURE);
 }
 
-static void AddressToString(uint32_t ip, uint16_t port, char *buff)
+/*static void AddressToString(uint32_t ip, uint16_t port, char *buff)
 {
 	struct in_addr addr;
 	addr.s_addr = ip;
 	sprintf(buff, "%s:%d", inet_ntoa(addr), (int) port);
-}
+}*/
 
 static void rmspace(char *str)
 {
@@ -104,7 +104,7 @@ static char *tolow(char *str)
 	return buf;
 }
 
-const char *SessionToString(const TcpSession *sess)
+/*const char *SessionToString(const TcpSession *sess)
 {
 	static char buff[512];
 	char addr1[32], addr2[32];
@@ -118,7 +118,7 @@ const char *SessionToString(const TcpSession *sess)
 	sprintf(buff, "%s<->%s", addr1, addr2);
 	return buff;
 }
-
+*/
 
 /* Format and dump the data on the screen */
 void DumpData(const u_char* data, uint32_t sz)
@@ -257,6 +257,15 @@ int load_config(const char *path, struct _config *config)
 				return(-1);
 			}
 		}
+		else if (!strcmp(key,"dsslport"))
+                {
+                        config->cap[index]->dsslport = (uint16_t) atoi(val);
+                        if (config->cap[index]->dsslport == 0) // it will always < 65535 due to limited range of data type
+                        {
+                                fprintf(stderr, "Invalid TCP dsslport value \"%d\".\n", config->cap[index]->dsslport);
+                                return(-1);
+                        }
+                }
 		else if (!strcmp(key,"key"))
 		{
 			strcpy(config->cap[index]->keyfile, val);
@@ -325,6 +334,7 @@ void print_config(struct _config *cfg)
 		printf("\t| Destination Interface: %-27s|\n", cfg->cap[index]->dst_interface);
 		printf("\t| Server IP address: %-31s|\n", inet_ntoa(cfg->cap[index]->server_ip));
 		printf("\t| TCP Port: %-40d|\n",cfg->cap[index]->port);
+                printf("\t| TCP DSSL Port: %-35d|\n",cfg->cap[index]->dsslport);
 		printf("\t+---------------------------------------------------+\n\n");
 	}
 
@@ -336,8 +346,8 @@ char *dssl_error(int n)
 	{
 		case DSSL_E_OUT_OF_MEMORY:
 			return("Out of memory");
-		case DSSL_E_SSL_LOAD_CERTIFICATE:
-			return("SSL certificate load error");
+/*		case DSSL_E_SSL_LOAD_CERTIFICATE:
+			return("SSL certificate load error");*/
 		case DSSL_E_SSL_LOAD_PRIVATE_KEY:
 			return("SSL private key load error");
 		case DSSL_E_SSL_UNKNOWN_VERSION:
@@ -404,45 +414,55 @@ int check_config(struct _config *cfg)
 		if (strlen(cfg->cap[index]->src_interface) < 1)
 		{
 			if (cfg->cmdl)
-				puts("Please, deffine source interface name: option \"-s\" (or \"--src-interface\") is obligatory.");
+				puts("Please, define source interface name: option \"-s\" (or \"--src-interface\") is obligatory.");
 			else
-				printf("Please, deffine source interface name: key \"src\" in config file in section [\"%s\"] is obligatory.",cfg->cap[index]->title);
+				printf("Please, define source interface name: key \"src\" in config file in section [\"%s\"] is obligatory.",cfg->cap[index]->title);
 			optchk = 1;
 		}
 	
 		if (strlen(cfg->cap[index]->dst_interface) < 1)
 		{
 			if (cfg->cmdl)
-				puts("Please, deffine destination interface name: option \"-d\" (or \"--dst-interface\") is obligatory.");
+				puts("Please, define destination interface name: option \"-d\" (or \"--dst-interface\") is obligatory.");
 			else
-				printf("Please, deffine destination interface name: key \"dst\" in config file in section [\"%s\"] is obligatory.",cfg->cap[index]->title);
+				printf("Please, define destination interface name: key \"dst\" in config file in section [\"%s\"] is obligatory.",cfg->cap[index]->title);
 			optchk = 1;
 		}
+
+		if( ( strcmp(cfg->cap[index]->dst_interface, cfg->cap[index]->src_interface) == 0 ) && ( cfg->cap[index]->dsslport == 0 ) )
+                {
+                        if (cfg->cmdl)
+                                puts("Please, define DSSL port if source and destination interfaces are the same: option \"-D\" (or \"--dssl-port\").");
+                        else
+                                printf("Please, define DSSL port if source and destination interfaces are the same: key \"dsslport\" in config file in section [\"%s\"]",cfg->cap[index]->title);
+                        optchk = 1;
+                }
+
 
 		if (cfg->cap[index]->server_ip.s_addr == 0)
 		{
 			if (cfg->cmdl)
-				puts("Please, deffine server ip address: option \"-i\" (or \"--ip\") is obligatory.");
+				puts("Please, define server ip address: option \"-i\" (or \"--ip\") is obligatory.");
 			else
-				printf("Please, deffine source ip address: key \"ip\" in config file in section [\"%s\"] is obligatory.",cfg->cap[index]->title);
+				printf("Please, define source ip address: key \"ip\" in config file in section [\"%s\"] is obligatory.",cfg->cap[index]->title);
 			optchk = 1;
 		}
 
 		if (cfg->cap[index]->port == 0)
 		{
 			if (cfg->cmdl)
-				puts("Please, deffine port number: option \"-p\" (or \"--port\" is obligatory.");
+				puts("Please, define port number: option \"-p\" (or \"--port\" is obligatory.");
 			else
-				printf("Please, deffine port number: key \"port\" in config file in section [\"%s\"] is obligatory.",cfg->cap[index]->title);
+				printf("Please, define port number: key \"port\" in config file in section [\"%s\"] is obligatory.",cfg->cap[index]->title);
 			optchk = 1;
 		}
 
 		if (strlen(cfg->cap[index]->keyfile) < 1)
 		{
 			if (cfg->cmdl)
-				puts("Please, deffine keyfile path: option \"-k\" (or \"--key\") is obligatory.");
+				puts("Please, define keyfile path: option \"-k\" (or \"--key\") is obligatory.");
 			else
-				printf("Please, deffine keyfile path: key \"key\" in config file in section [\"%s\"] is obligatory.",cfg->cap[index]->title);
+				printf("Please, define keyfile path: key \"key\" in config file in section [\"%s\"] is obligatory.",cfg->cap[index]->title);
 			optchk = 1;
 		}
 	}
@@ -461,6 +481,7 @@ void usage (void)
 	"   --pwd (-w) <pass>\t: private key passphrase.\n" \
 	"   --ip (-i) <ip addr>\t: server IP address.\n" \
 	"   --port (-p) <port>\t: server port number. Port 443 is used if not specified directly.\n" \
+        "   --dsslport (-D) <port>\t: port number to use for decrypted traffic. Port number specified by --port is used if not specified directly.\n" \
 	"   --src-interface (-s) <interface> : capture and decrypt data from network link <interface>.\n" \
 	"   --dst-interface (-d) <interface> : write decrypted data to network link <interface>.\n" \
 	"   --no-daemon (-n)\t: do not daemonize (for debugging).\n" \
@@ -500,13 +521,14 @@ int optparse(struct _config *config, char argc, char ** argv, char ** envp)
 		{"key",1,0,'k'},
 		{"pwd",1,0,'w'},
 		{"port",1,0,'p'},
+		{"dsslport",1,0,'D'},
 		{"ip",1,0,'i'},
 		{"src-interface",1,0,'s'},
 		{"dst-interface",1,0,'d'},
 		{0,0,0,0}
 	};
 
-	while ((optac = getopt_long (argc,argv,"vnhw:f:k:s:d:p:i:c::",long_options,&option_index)) != -1)
+	while ((optac = getopt_long (argc,argv,"vnhw:f:k:s:d:p:D:i:c::",long_options,&option_index)) != -1)
 		switch (optac)
 		{
 			case 'c':
@@ -595,6 +617,15 @@ int optparse(struct _config *config, char argc, char ** argv, char ** envp)
 							return(-1);
 						}
 						break;
+					 case 'D':
+                                                config->cap[0]->dsslport = (uint16_t) atoi(optarg);
+                                                if (config->cap[0]->dsslport == 0) // it will always < 65535 due to limited range of data type
+                                                {
+                                                        fprintf(stderr, "Invalid DSSL TCP port value \"%d\".\n", \
+                                                        config->cap[0]->dsslport);
+                                                        return(-1);
+                                                }
+                                                break;
 					case 'i':
 						if (inet_aton(optarg, &config->cap[0]->server_ip) == 0)
 						{
