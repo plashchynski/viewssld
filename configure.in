@@ -1,0 +1,23 @@
+AC_PREREQ(2.57)
+AC_INIT(viewssld, 0.6.0, plashchynski@gmail.com)
+AC_CONFIG_SRCDIR([src/viewssld.c])
+
+AC_CANONICAL_TARGET
+AM_INIT_AUTOMAKE
+
+AC_PROG_INSTALL
+AC_PROG_CC
+
+LDFLAGS="$LDFLAGS -lpcap -lssl -lnet -ldssl"
+
+AC_HEADER_STDC
+AC_HEADER_SYS_WAIT
+AC_CHECK_HEADERS([arpa/inet.h netinet/in.h stdlib.h string.h sys/ioctl.h sys/socket.h syslog.h unistd.h])
+
+AC_CHECK_HEADER([pcap.h],,[AC_MSG_ERROR([libpcap header file not found. Install libpcap-dev package.])])
+AC_CHECK_HEADER([openssl/ssl.h],,[AC_MSG_ERROR([libssl header file not found. Install libssl-dev package.])])
+AC_CHECK_HEADER([dssl/sslcap.h],,[AC_MSG_ERROR([libdssl header file not found. Install libdssl-dev package from http://plashc.belsec.com/files/dssl-1.3.0.tar.gz])])
+AC_CHECK_HEADER([libnet.h],,[AC_MSG_ERROR([libnet header file not found. Install libnet-dev package.])])
+
+
+AC_OUTPUT(Makefile src/Makefile doc/Makefile distribute.sh,[chmod +x distribute.sh],)

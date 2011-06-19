@@ -1,0 +1,19 @@
+#!/bin/sh
+PACKAGE=@PACKAGE_TARNAME@
+VERSION=@VERSION@
+NAME=@PACKAGE_TARNAME@-@VERSION@
+
+make clean
+cd ..
+rm -rf ${NAME}
+cp -R viewssld ${NAME}
+rm -f ${NAME}.tar
+tar -c ${NAME} -f ${NAME}.tar
+rm -f ${NAME}.tar.bz2
+bzip2 -z -k -f ${NAME}.tar
+rm -f ${NAME}.tar.gz
+gzip ${NAME}.tar
+rm -rf ${NAME}
+cd viewssld
+
+
