@@ -1,0 +1,4 @@
+config.log
+autom4te.cache/
+config.status
+.deps
