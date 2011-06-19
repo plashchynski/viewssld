@@ -16,7 +16,7 @@ AC_CHECK_HEADERS([arpa/inet.h netinet/in.h stdlib.h string.h sys/ioctl.h sys/soc
 
 AC_CHECK_HEADER([pcap.h],,[AC_MSG_ERROR([libpcap header file not found. Install libpcap-dev package.])])
 AC_CHECK_HEADER([openssl/ssl.h],,[AC_MSG_ERROR([libssl header file not found. Install libssl-dev package.])])
-AC_CHECK_HEADER([dssl/sslcap.h],,[AC_MSG_ERROR([libdssl header file not found. Install libdssl-dev package from http://plashc.belsec.com/files/dssl-1.3.0.tar.gz])])
+AC_CHECK_HEADER([dssl/sslcap.h],,[AC_MSG_ERROR([libdssl header file not found. http://svn.atomiclabs.com/dssl/releases/2.1.1/])])
 AC_CHECK_HEADER([libnet.h],,[AC_MSG_ERROR([libnet header file not found. Install libnet-dev package.])])
 
 
