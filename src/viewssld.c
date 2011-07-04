@@ -336,6 +336,9 @@ static int proceed(void)
 		 return(-1);
 	 }
 
+	// 255 is sessionTableSize
+	// First 0 means use default key_timeout_interval - libdssl 2.1.1 will use 3600 here
+	// Second 0 means use default tcp_timeout_interval - libdssl 2.1.1 will use 180 here
 	env = CapEnvCreate(p, 255, 0, 0);
 
 	rc = CapEnvSetSSL_ServerInfo(env, &config.cap[capindex]->server_ip, config.cap[capindex]->port, 
