@@ -336,7 +336,7 @@ static int proceed(void)
 		 return(-1);
 	 }
 
-	env = CapEnvCreate(p, 10000, 10000, 10000);
+	env = CapEnvCreate(p, 255, 0, 0);
 
 	rc = CapEnvSetSSL_ServerInfo(env, &config.cap[capindex]->server_ip, config.cap[capindex]->port, 
 					config.cap[capindex]->keyfile, config.cap[capindex]->pwd);
