@@ -1,23 +1,18 @@
-	viewssld - open source SSL decryption daemon for Snort and other network Intrusion Detection System (IDS). Libdssl you can download here: https://github.com/downloads/plashchynski/viewssld/libdssl-2.1.1.tar.gz See http://resources.infosecinstitute.com/ssl-decryption/ for more details.
+viewssld is an open source SSL decryption daemon for Snort and other network Intrusion Detection System (IDS).
+
+== Requirements
+* libpcap
+* libssl
+* libdssl you can download it here: https://github.com/downloads/plashchynski/viewssld/libdssl-2.1.1.tar.gz
 
 
+== Download
+You can download the latest viewssld version here: https://github.com/downloads/plashchynski/viewssld/viewssld-0.7.0.tar.bz2
 
-  Copyright (C) 2008 Dmitry Plashchynski
 
-  viewssld is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 2 of the License, or
-  (at your option) any later version.
+== Installation and Usage
+See http://resources.infosecinstitute.com/ssl-decryption/ for more details. Please note that libdssl is no longer available at atomiclabs svn archive so the libdssl download link in the article doesn't work. You can download libdssl here: https://github.com/downloads/plashchynski/viewssld/libdssl-2.1.1.tar.gz
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-Comments are welcome.
-
-	- Dmitry Plashchynski <plashchynski@gmail.com>
+== Support
+Need some help? Feel free to create an issue https://github.com/plashchynski/viewssld/issues
