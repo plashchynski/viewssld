@@ -11,7 +11,7 @@ You can download the latest viewssld version here: https://github.com/downloads/
 
 
 == Installation and Usage
-See http://resources.infosecinstitute.com/ssl-decryption/ for more details. Please note that libdssl is no longer available at atomiclabs svn archive so the libdssl download link in the article doesn't work. You can download libdssl here: https://github.com/downloads/plashchynski/viewssld/libdssl-2.1.1.tar.gz
+See http://resources.infosecinstitute.com/ssl-decryption/ for more details. Please note that libdssl is no longer available at the atomiclabs svn archive so the libdssl download link in the article doesn't work. You can download libdssl here: https://github.com/downloads/plashchynski/viewssld/libdssl-2.1.1.tar.gz
 
 
 == Support
