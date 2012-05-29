@@ -8,12 +8,10 @@ cd ..
 rm -rf ${NAME}
 cp -R viewssld ${NAME}
 rm -f ${NAME}.tar
-tar -c ${NAME} -f ${NAME}.tar
+tar -c ${NAME} > ${NAME}.tar
 rm -f ${NAME}.tar.bz2
 bzip2 -z -k -f ${NAME}.tar
 rm -f ${NAME}.tar.gz
 gzip ${NAME}.tar
 rm -rf ${NAME}
 cd viewssld
-
-
