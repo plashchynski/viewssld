@@ -1,4 +1,4 @@
-	viewssld - open source SSL decryption daemon for Snort and other network Intrusion Detection System (IDS). See http://resources.infosecinstitute.com/ssl-decryption/ for more details.
+	viewssld - open source SSL decryption daemon for Snort and other network Intrusion Detection System (IDS). Libdssl you can download here: https://github.com/downloads/plashchynski/viewssld/libdssl-2.1.1.tar.gz See http://resources.infosecinstitute.com/ssl-decryption/ for more details.
 
 
 
