@@ -2,7 +2,7 @@ viewssld is an open source SSL decryption daemon for Snort and other network Int
 
 == Requirements
 * libpcap
-* libssl
+* libssl (openssl)
 * libdssl you can download it here: https://github.com/downloads/plashchynski/viewssld/libdssl-2.1.1.tar.gz
 
 
