@@ -2,3 +2,9 @@ config.log
 autom4te.cache/
 config.status
 .deps
+Makefile
+Makefile.in
+distribute.sh
+doc/Makefile
+src/Makefile
+
