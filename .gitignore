@@ -1,3 +1,4 @@
+configure
 config.log
 autom4te.cache/
 config.status
@@ -6,7 +7,10 @@ Makefile
 Makefile.in
 distribute.sh
 doc/Makefile
+doc/Makefile.in
 src/Makefile
+src/Makefile.in
 *.o
 *.lo
 *.la
+src/viewssld

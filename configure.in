@@ -8,8 +8,6 @@ AM_INIT_AUTOMAKE
 AC_PROG_INSTALL
 AC_PROG_CC
 
-LDFLAGS="$LDFLAGS -lpcap -lssl -lnet -ldssl"
-
 AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
 AC_CHECK_HEADERS([arpa/inet.h netinet/in.h stdlib.h string.h sys/ioctl.h sys/socket.h syslog.h unistd.h])
