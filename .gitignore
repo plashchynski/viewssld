@@ -7,4 +7,6 @@ Makefile.in
 distribute.sh
 doc/Makefile
 src/Makefile
-
+*.o
+*.lo
+*.la
