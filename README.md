@@ -1,4 +1,4 @@
-viewssld — SSL decryption daemon for Snort and other IDS.
+viewssld — SSL decryption daemon for Snort
 --------------------
 viewssld is a free, open source, non-terminating SSLv2/SSLv3/TLS traffic decryption daemon for Snort, and other Network Intrusion Detection Systems (IDS).
 

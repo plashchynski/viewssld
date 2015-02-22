@@ -1,7 +1,7 @@
 /*
 ** This file is a part of viewssld package.
 **
-** Copyright (C) 2007-2008, Dmitry Plashchynski <plashchynski@gmail.com>
+** Copyright (C) 2007-2008, Dzmitry Plashchynski <plashchynski@gmail.com>
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
