@@ -85,6 +85,7 @@ static void rmspace(char *str)
 	buff[j] = '\0';
 	
 	strcpy(str, buff);
+	free(buff);
 }
 
 static char *tolow(char *str)
